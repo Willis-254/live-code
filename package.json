@@ -1,0 +1,23 @@
+{
+  "name": "ecommapp",
+  "version": "1.0.0",
+  "description": "a backend for ecommapp",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js"
+  },
+  "keywords": [
+    "project"
+  ],
+  "author": "willis",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "install": "^0.13.0",
+    "mongose": "^0.0.2-security",
+    "moongose": "^1.0.0"
+  }
+}

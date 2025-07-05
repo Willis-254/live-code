@@ -16,7 +16,7 @@ export const signUp=asyncHandler(async(req,res)=>{
     const existingUser=await User.findOne({email})
 
     if(existingUser){
-        throw new CustomError("User already exists")
+        throw new CustomError("User already exists",400)
     }
 
     const user=await User.create({

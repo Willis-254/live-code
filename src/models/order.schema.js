@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import OrderStatus from "../utils/orderStatus"
+import OrderStatus from "../utils/OrderStatus"
 
 const orderSchema=new mongoose.Schema({
     product:{

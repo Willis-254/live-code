@@ -1,5 +1,6 @@
 import asyncHandler from "../service/asyncHandler";
 import CustomError from "../utils/customError";
+import User from "../models/user.schema"
 
 export const cookieOPtion={
     expires: new Date(Date.now()+3*24*60*60*1000),
@@ -25,9 +26,9 @@ export const signUp=asyncHandler(async(req,res)=>{
         password
     })
 
-    const token=user.getJWTtoken
+    const token=User.getJWTtoken
 
-    user.password=undefined
+    User.password=undefined
 
     res.cookie("token",token, cookieOPtion)
 
@@ -52,11 +53,11 @@ export const login=asyncHandler(async(req,res)=>{
         throw new CustomError("Invalid Credentials",400)
     }
 
-    const isPasswordMatched= await user.comparepassword(password)
+    const isPasswordMatched= await User.comparepassword(password)
 
     if(isPasswordMatched){
-        const token=user.getJWTtoken
-        user.password=undefined
+        const token=User.getJWTtoken
+        User.password=undefined
         res.cookie("token",token,cookieOPtion)
         return res.status(200).json({
             success: true,

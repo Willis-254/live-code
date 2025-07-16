@@ -39,7 +39,7 @@ export const updateCollection=asyncHandler(async(req,res)=>{
     res.status(200).json({
         success: true,
         message: "Collection waas created successfully",
-        collection
+        collectionID
     })
 
     if(!updatedCollection){

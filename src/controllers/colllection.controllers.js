@@ -3,6 +3,25 @@ import asyncHandler from "../service/asyncHandler.js"
 import CustomError from "../utils/customError"
 
 
+
+
+/**********************************************************
+
+
+ * @CREATE_COLLECTION
+
+
+ * @route https://localhost:5000/api/collection/
+
+
+ * @description Controller used for creating a new collection
+
+
+ * @description Only admin can create the collection
+
+
+ *********************************************************/
+
 export const createCollection=asyncHandler(async(req,res)=>{
     const {name}=req.body
 
@@ -21,6 +40,23 @@ export const createCollection=asyncHandler(async(req,res)=>{
     })
 })
 
+  /**
+
+
+   * @UPDATE_COLLECTION
+
+
+   * @route http://localhost:5000/api/collection/:collectionId
+
+
+   * @description Controller for updating the collection details
+
+
+   * @description Only admin can update the collection
+
+
+   */
+
 export const updateCollection=asyncHandler(async(req,res)=>{
     const {name}=req.body
     const {id: collectionID}=req.params
@@ -38,7 +74,7 @@ export const updateCollection=asyncHandler(async(req,res)=>{
 
     res.status(200).json({
         success: true,
-        message: "Collection waas created successfully",
+        message: "Collection was created successfully",
         collectionID
     })
 
@@ -46,6 +82,24 @@ export const updateCollection=asyncHandler(async(req,res)=>{
         throw new CustomError("Collection not found",400)
     }
 })
+
+
+  /**
+
+
+   * @DELETE_COLLECTION
+
+
+   * @route http://localhost:5000/api/collection/:collectionId
+
+
+   * @description Controller for deleting the collection
+
+
+   * @description Only admin can delete the collection
+
+
+   */
 
 export const deleteCollection=asyncHandler(async(req,res)=>{
     const {id: collectionID}=req.params

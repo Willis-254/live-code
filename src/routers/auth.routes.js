@@ -10,4 +10,4 @@ router.get("./logout",logout)
 
 router.get("./profile",isLoggedIn,getProfile)
 
-export default router z z z zxz xz
+export default router;

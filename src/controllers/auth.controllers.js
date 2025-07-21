@@ -7,8 +7,20 @@ export const cookieOPtion={
     httpOnly: true
 }
 
+/******************************************************
+
+ * @SIGNUP
+
+ * @route http://localhost:5000/api/auth/signup
+
+ * @description User signUp Controller for creating new user
+
+ * @returns User Object
+
+ ******************************************************/
+
 export const signUp=asyncHandler(async(req,res)=>{
-    const {name, email, body}=req.body
+    const {name, email, password}=req.body
 
     if(!name || !email || !password){
         throw new CustomError("Please add all fields",400)
@@ -40,10 +52,27 @@ export const signUp=asyncHandler(async(req,res)=>{
     )
 })
 
-export const login=asyncHandler(async(req,res)=>{
-    const {name, email, body}=req.body
+/*********************************************************
 
-    if(!name || !email){
+
+ * @LOGIN
+
+
+ * @route http://localhost:5000/api/auth/login
+
+
+ * @description User Login Controller for signing in the user
+
+
+ * @returns User Object
+
+
+ *********************************************************/
+
+export const login=asyncHandler(async(req,res)=>{
+    const {email, password}=req.body
+
+    if(!password || !email){
         throw new CustomError("Please add all fields",400)
     }
 
@@ -69,6 +98,29 @@ export const login=asyncHandler(async(req,res)=>{
     throw new CustomError("Password is incorrect",400)
 })
 
+
+
+
+/**********************************************************
+
+
+ * @LOGOUT
+
+
+ * @route http://localhost:5000/api/auth/logout
+
+
+ * @description User Logout Controller for logging out the user
+
+
+ * @description Removes token from cookies
+
+
+ * @returns Success Message with "Logged Out"
+
+
+ **********************************************************/
+
 export const logout=asyncHandler(async(req,res)=>{
     res.cookie("token",null,{
         expires: new Date(Date.now()),
@@ -80,6 +132,27 @@ export const logout=asyncHandler(async(req,res)=>{
         message: "Logged Out"
     })
 })
+
+
+
+
+
+/**********************************************************
+
+
+ * @GET_PROFILE
+
+
+ * @route http://localhost:5000/api/auth/profile
+
+
+ * @description check token in cookies, if present then returns user details
+
+
+ * @returns Logged In User Details
+
+
+ **********************************************************/
 
 export const getProfile=asyncHandler(async(req,res)=>{
     const {user}= req

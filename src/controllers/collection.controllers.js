@@ -1,6 +1,6 @@
 import Collection from "../models/collections.schema.js"
 import asyncHandler from "../service/asyncHandler.js"
-import CustomError from "../utils/customError"
+import CustomError from "../utils/customError.js"
 
 
 
@@ -116,4 +116,19 @@ export const deleteCollection=asyncHandler(async(req,res)=>{
         success: true,
         message: "Collection deleted successfully",
     })
+})
+
+export const getAllCoupons = asyncHandler( async (req, res) => {
+    const allCoupons = await Coupon.find();
+
+    if (!allCoupons) {
+        throw new CustomError("No Coupons found", 400)
+        
+    }
+
+    res.status(200).json({
+        success: true,
+        allCoupons
+    })
+    
 })

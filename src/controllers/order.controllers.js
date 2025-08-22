@@ -3,36 +3,29 @@ import Coupon from "../models/coupon.schema.js";
 import Order from "../models/order.schema.js";
 import asyncHandler from "../service/asyncHandler.js";
 import CustomError from "../utils/customError.js";
+import mpesa from "../config/mpesa.config.js";
 
-export const createCoupon=asyncHandler(async(req, res)=>{
-    const {code, discount}=req.body
+export const generateMpesaOrderId=asyncHandler(async (req,res)=>{
+    const {products, couponCode}=req.body;
 
-    if(!code || !discount){
-        throw new CustomError("Code and Discount are required",400)
+    if(!products || products.length<1) {
+        throw new CustomError("No products found",400);
     }
 
-    Coupon.create({
-        code,
-        discount
-    })
+    let discountAmount = 0;
 
-    res.status(200).json({
-        success: true,
-        message: "Coupon created successfully",
-        Coupon
-    })
+    let productPriceCalc=Promise.all(products.map(async (product) => {
+        
+    }
+    const options={
+        amount: 0,
+        currency: "KES",
+        phoneNumber: req.user.phoneNumber,
+        description: "Payment for products",
+        callbackUrl: process.env.MPESA_CALLBACK_URL,
+        receipt: `receipt_${Date.now().getTime()}`,
+    }
+
+    const order=await mpesa.order.create(options)
 })
 
-export const getAllCoupons=asyncHandler(async(req, res)=>{
-    const allCoupons=await Coupon.find()
-
-    if(!allCoupons){
-        throw new CustomError("No coupon found",400)
-    }
-
-    res.status(200).json({
-        success: true,
-        allCoupons
-    })
-}
-)

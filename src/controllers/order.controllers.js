@@ -14,9 +14,9 @@ export const generateMpesaOrderId=asyncHandler(async (req,res)=>{
 
     let discountAmount = 0;
 
-    let productPriceCalc=Promise.all(products.map(async (product) => {
-        
-    }
+    let productPriceCalc=Promise.all(products.map(async (Product) => {
+    const {productId,count}=Produ;  
+    }))
     const options={
         amount: 0,
         currency: "KES",
